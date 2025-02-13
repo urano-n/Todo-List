@@ -1,20 +1,16 @@
-import { useState } from 'react';
+import { Box, VStack, Heading } from "@chakra-ui/react"
+import { useState } from 'react'
 import List from './List'
-import Form from './Form'
+// import Form from './Form'
+import Demo from './Demo'
 
 const Todo = () => {
   const todoList = [
     {
       id: 1,
       content: "お店の予約",
-    },
-    {
-      id: 2,
-      content: "卵買う",
-    },
-    {
-      id: 3,
-      content: "郵便出す",
+      time: "",
+      memo: "焼肉",
     },
   ];
 
@@ -28,16 +24,14 @@ const Todo = () => {
     setTodos(newTodos);
   }
 
-  const createTodo = (todo) => {
-    setTodos([...todos, todo]);
-  }
-
   return (
-    <>
-      <h1>TODOリスト</h1>
-      <Form createTodo={createTodo}/>
+    <Box bgColor="#eceaea">
+      <VStack bgColor="#a3cacf" p="10" gap="8">
+        <Heading as="h1" size="6xl" color="#000000">TODO LIST</Heading>
+        <Demo todos={todos} setTodos={setTodos}/>
+      </VStack>
       <List todos={todos} deleteTodo={deleteTodo}/>
-    </>
+    </Box>
   );
 };
 
