@@ -9,7 +9,8 @@ import {
 } from "./ui/accordion"
 import FormatDate from "./FormatDate"
 
-const List = ({todos, deleteTodo}) => {
+const List = ({todos, deleteTodo, inputChange}) => {
+
   const complete = (id) => {
     deleteTodo(id)
   }
@@ -26,7 +27,7 @@ const List = ({todos, deleteTodo}) => {
                     <Box position="relative">
                       <AccordionItemTrigger indicatorPlacement="start">
                         <Stack>
-                        <Text textAlign="left">{todo.content}</Text>
+                        <Input textAlign="left" value={todo.content} onChange={(e) => inputChange(todo.id, e)} />
                         {todo.time && <Text >{FormatDate(todo.time)}</Text>}
                         </Stack>
                       </AccordionItemTrigger>
