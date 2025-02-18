@@ -1,6 +1,6 @@
 import { useState } from "react"
-import { Stack, Card, IconButton, Center, AbsoluteCenter, Box, Text, VStack, Input } from "@chakra-ui/react"
-import { CgClose, CgCheck } from "react-icons/cg"
+import { Stack, Card, IconButton, Center, AbsoluteCenter, Box, Text, VStack, Input, Button } from "@chakra-ui/react"
+import { CgClose, CgCheck, CgCalendar } from "react-icons/cg"
 import {
   AccordionItem,
   AccordionItemContent,
@@ -27,8 +27,8 @@ const List = ({todos, deleteTodo, inputChange}) => {
                     <Box position="relative">
                       <AccordionItemTrigger indicatorPlacement="start">
                         <Stack>
-                        <Input textAlign="left" value={todo.content} onChange={(e) => inputChange(todo.id, e)} />
-                        {todo.time && <Text >{FormatDate(todo.time)}</Text>}
+                        <Input textAlign="left" placeholder="タイトルを追加" value={todo.content} onChange={(e) => inputChange(todo.id, 'content', e)} />
+                        <Input type="datetime-local" textAlign="left" value={todo.time} onChange={(e) => inputChange(todo.id, 'time', e)} />
                         </Stack>
                       </AccordionItemTrigger>
                       <AbsoluteCenter axis="vertical" insetEnd="0" mr="8px">
@@ -36,7 +36,15 @@ const List = ({todos, deleteTodo, inputChange}) => {
                         <IconButton aria-label="削除" variant="subtle" colorPalette="red" onClick ={ () => complete(todo.id)} ><CgClose /></IconButton>
                       </AbsoluteCenter>
                     </Box>
-                    {todo.memo && <AccordionItemContent  p="16px">{todo.memo}</AccordionItemContent>}
+                    {todo.memo ? (
+                    <AccordionItemContent  p="16px">
+                      <Input textAlign="left" value={todo.memo} onChange={(e) => inputChange(todo.id, 'memo', e)} />
+                    </AccordionItemContent>
+                    ):(
+                    <AccordionItemContent  p="16px">
+                      <Input textAlign="left" placeholder="メモを追加" value={todo.memo} onChange={(e) => inputChange(todo.id, 'memo', e)} />
+                    </AccordionItemContent>
+                    )}
                   </AccordionItem>
                </AccordionRoot>
               </Card.Body>

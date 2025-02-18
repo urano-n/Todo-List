@@ -9,13 +9,14 @@ const Todo = () => {
     {
       id: 1,
       content: "お店の予約",
-      time: "",
+      time: "2025-02-13T12:00",
       memo: "焼肉",
     },
   ];
 
   const [ todos, setTodos ] = useState(todoList);
 
+  // Todoを削除する関数
   const deleteTodo = (id) => {
     const newTodos = todos.filter((todo) => {
       return todo.id !== id;
@@ -25,10 +26,10 @@ const Todo = () => {
   }
 
   // Todoの内容を編集する関数
-  const inputChange = ( id, e ) => {
+  const inputChange = ( id, field, e ) => {
     const changeTodos = todos.map(todo => {
       if (todo.id === id) {
-        return { ...todo, content: e.target.value };
+        return { ...todo, [field]: e.target.value };
       }
       return todo;
     });

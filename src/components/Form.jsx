@@ -10,7 +10,7 @@ const Form = ({createTodo}) => {
     e.preventDefault();
 
     // enterdTodo が空の場合、「新規タスク」を設定
-    const todoContent = enterdTodo === "" ? "新規タスク" : enterdTodo;
+    const todoContent = enterdTodo === "" ? "" : enterdTodo;
 
     const newTodo = {
       id: Math.floor(Math.random() * 1e5),
