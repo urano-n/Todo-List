@@ -1,18 +1,20 @@
-import { useState } from "react"
-import { Stack, Card, IconButton, Center, AbsoluteCenter, Box, Text, VStack, Input, Button } from "@chakra-ui/react"
-import { CgClose, CgCheck, CgCalendar } from "react-icons/cg"
+import { Stack, Card, IconButton, Center, AbsoluteCenter, Box, Input, Textarea } from "@chakra-ui/react"
+import { CgCheck, CgTrash } from "react-icons/cg"
 import {
   AccordionItem,
   AccordionItemContent,
   AccordionItemTrigger,
   AccordionRoot,
 } from "./ui/accordion"
-import FormatDate from "./FormatDate"
 
-const List = ({todos, deleteTodo, inputChange}) => {
+const List = ({todos, deleteTodo, inputChange, completeTodo }) => {
 
-  const complete = (id) => {
+  const handleDelete = (id) => {
     deleteTodo(id)
+  }
+
+  const handleComplete = (id) => {
+    completeTodo(id)
   }
 
   return (
@@ -25,24 +27,24 @@ const List = ({todos, deleteTodo, inputChange}) => {
                 <AccordionRoot spaceY="4" variant="plain" collapsible defaultValue={["b"]}>
                   <AccordionItem key={todo.id} value={todo.value}>
                     <Box position="relative">
-                      <AccordionItemTrigger indicatorPlacement="start">
+                      <AccordionItemTrigger indicatorPlacement="start" _focus={{ outline: "none" }} _hover={{ borderColor: "white" }}>
+                        <IconButton aria-label="完了" variant="subtle" rounded="full" color="white" border= "none" bgColor="#cccccc" _hover={{ bgColor: "#a3cacf" }} onClick ={ () => handleComplete(todo.id)} ><CgCheck /></IconButton>
                         <Stack>
-                        <Input textAlign="left" placeholder="タイトルを追加" value={todo.content} onChange={(e) => inputChange(todo.id, 'content', e)} />
-                        <Input type="datetime-local" textAlign="left" value={todo.time} onChange={(e) => inputChange(todo.id, 'time', e)} />
+                        <Input textAlign="left" border="none" fontWeight="bold" height="fit-content" placeholder="タイトルを追加" _focus={{ outline: "none" }} value={todo.content} onChange={(e) => inputChange(todo.id, 'content', e)} />
+                        <Input type="datetime-local" textAlign="left" border="none" textStyle="xs" height="fit-content" width="fit-content" _focus={{ outline: "none" }} value={todo.time} onChange={(e) => inputChange(todo.id, 'time', e)} />
                         </Stack>
                       </AccordionItemTrigger>
                       <AbsoluteCenter axis="vertical" insetEnd="0" mr="8px">
-                        <IconButton  aria-label="完了"variant="subtle" colorPalette="blue" onClick ={ () => complete(todo.id)} ><CgCheck /></IconButton>
-                        <IconButton aria-label="削除" variant="subtle" colorPalette="red" onClick ={ () => complete(todo.id)} ><CgClose /></IconButton>
+                        <IconButton aria-label="削除" variant="subtle" rounded="full" color="black" border= "none" _hover={{ borderColor: "#cfa3a3", }} _focus={{ outline: "none" }} onClick ={ () => handleDelete(todo.id)} ><CgTrash /></IconButton>
                       </AbsoluteCenter>
                     </Box>
                     {todo.memo ? (
                     <AccordionItemContent  p="16px">
-                      <Input textAlign="left" value={todo.memo} onChange={(e) => inputChange(todo.id, 'memo', e)} />
+                      <Textarea textAlign="left" border="none" _focus={{ outline: "none" }} height="fit-content" value={todo.memo} onChange={(e) => inputChange(todo.id, 'memo', e)} />
                     </AccordionItemContent>
                     ):(
                     <AccordionItemContent  p="16px">
-                      <Input textAlign="left" placeholder="メモを追加" value={todo.memo} onChange={(e) => inputChange(todo.id, 'memo', e)} />
+                      <Textarea textAlign="left" border="none" _focus={{ outline: "none" }} height="fit-content" placeholder="メモを追加" value={todo.memo} onChange={(e) => inputChange(todo.id, 'memo', e)} />
                     </AccordionItemContent>
                     )}
                   </AccordionItem>

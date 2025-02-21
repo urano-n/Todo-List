@@ -7,11 +7,6 @@ export const AccordionItemTrigger = React.forwardRef(
     const { children, indicatorPlacement = 'end', ...rest } = props
     return (
       <Accordion.ItemTrigger {...rest} ref={ref}>
-        {indicatorPlacement === 'start' && (
-          <Accordion.ItemIndicator rotate={{ base: '-90deg', _open: '0deg' }}>
-            <LuChevronDown />
-          </Accordion.ItemIndicator>
-        )}
         <HStack gap='4' flex='1' textAlign='start' width='full'>
           {children}
         </HStack>

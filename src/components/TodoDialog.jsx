@@ -1,6 +1,5 @@
 import { IconButton } from "@chakra-ui/react"
 import {
-  DialogBody,
   DialogContent,
   DialogHeader,
   DialogRoot,
@@ -13,7 +12,7 @@ import {
 import { CgMathPlus } from "react-icons/cg";
 import Form from './Form'
 
-const Demo = ({todos, setTodos}) => {
+const TodoDialog = ({todos, setTodos}) => {
 
   const createTodo = (todo) => {
     setTodos([...todos, todo]);
@@ -22,7 +21,7 @@ const Demo = ({todos, setTodos}) => {
   return (
     <DialogRoot size="lg" placement="center" motionPreset="slide-in-bottom">
       <DialogTrigger asChild>
-        <IconButton aria-label="addTodo" variant="subtle" size="sm" rounded="full" position="fixed" size="xl" bgColor="#eceaea" top="2%" right="5%">
+        <IconButton aria-label="addTodo" variant="subtle" rounded="full" position="fixed" size="xl" border= "none" top="2%" right="5%" _hover={{ bgColor: "#eae876", borderColor: "#a3cacf" }} _focus={{ outline: "none" }}>
           <CgMathPlus color="#2b262c" />
         </IconButton>
       </DialogTrigger>
@@ -37,4 +36,4 @@ const Demo = ({todos, setTodos}) => {
   )
 }
 
-export default Demo;
+export default TodoDialog;
